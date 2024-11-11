@@ -1,6 +1,7 @@
 use std::sync::mpsc::Sender;
 use eframe::egui;
 use crate::event::Event;
+use crate::models::http::CatJson;
 use crate::models::pet::{ PetKind};
 
 
@@ -20,7 +21,7 @@ pub fn fetch_pet_image(ctx: egui::Context, pet_kind: PetKind, sender: Sender<Eve
                     if let Ok(json) = result.json() {
                         Some(json)
                     } else { None }
-                } else if let Ok(json) = result.json() {
+                } else if let Ok(json) = result.json::<CatJson>() {
                     Some(json.item.url)
                 } else {
                     None

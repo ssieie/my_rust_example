@@ -86,10 +86,11 @@ pub fn get_pets_from_db(db_con: Arc<Mutex<Connection>>) -> Result<Vec<Pet>> {
 
     for row in stmt.iter() {
         let row = row?;
-        let id = row.read::<i64, _>(0)?;
-        let name = row.read::<&str, _>(1)?;
-        let age = row.read::<i64, _>(2)?;
-        let kind = row.read::<&str, _>(3)?;
+
+        let id = row.read::<i64, _>(0);
+        let name = row.read::<&str, _>(1);
+        let age = row.read::<i64, _>(2);
+        let kind = row.read::<&str, _>(3);
 
         pets.push(Pet {
             id,
